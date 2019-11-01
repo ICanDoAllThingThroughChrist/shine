@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191101194106) do
+ActiveRecord::Schema.define(version: 20191101214231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,16 +28,19 @@ ActiveRecord::Schema.define(version: 20191101194106) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email", null: false
-    t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cart_number1"
     t.integer "cart_number2"
     t.integer "cart_number3"
-    t.hstore "address"
+    t.string "address"
     t.string "phone"
     t.integer "taxid"
     t.integer "customerid"
+    t.integer "address_number"
+    t.string "city"
+    t.string "state"
+    t.integer "zipcode"
     t.index "lower((email)::text)", name: "index_customers_on_lower_email"
     t.index "lower((first_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_first_name_varchar_pattern_ops"
     t.index "lower((last_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_last_name_varchar_pattern_ops"
@@ -45,7 +48,6 @@ ActiveRecord::Schema.define(version: 20191101194106) do
     t.index ["customerid"], name: "index_customers_on_customerid", unique: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["phone"], name: "index_customers_on_phone", unique: true
-    t.index ["username"], name: "index_customers_on_username", unique: true
   end
 
   create_table "users", force: :cascade do |t|

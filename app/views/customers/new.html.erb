@@ -1,16 +1,16 @@
 <%=form_with scope: @customer, url: customers_path, local: true do |form| %>
-  <% if @customer.errors.any? %>
-   <div id="error_explanation">
-    <h2><%= pluralize(customers.errors.count, "error") %> prohibited this customer from being saved:</h2>
-      <ul>
-      <% customer.errors.full_messages.each do |message| %>
-      <li>
-        <%=message %>
-      </li>
+      <% if @customer.errors.any? %>
+       <div id="error_explanation">
+        <h2><%= pluralize(customers.errors.count, "error") %> prohibited this customer from being saved:</h2>
+          <ul>
+          <% customer.errors.full_messages.each do |message| %>
+          <li>
+            <%=message %>
+          </li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
        <div class="form-row align-items-center">
             <div class="col-aut">
                 <%=form.label :first_name %>
@@ -30,28 +30,29 @@
                 <%=form.label :phone %>
                 <%=form.telephone_field :phone, id: :customer_phone %>
             </div>
-      </div>
-      <div class="form-row align-items-center">
-          <%=form.fields_for :address do |a| %>
-              <div class="col-aut">
+            <div class="col-aut">
+                  <label>Street Number </label>
+                  <%= form.text_field :address_number, id: :address_number %>
+            </div>
+            <div class="col-aut">
                   <label>Street address </label>
-                  <%= a.text_field :street_address, id: :street_address %>
-              </div>
-              <div class="col-aut">
+                  <%= form.text_field :address, id: :address %>
+            </div>
+            <div class="col-aut">
                   <label>City </label>
-                  <%= a.text_field :city, id: :city %>
-              </div>
-              <div class="col-aut">
+                  <%= form.text_field :city, id: :city %>
+            </div>
+            <div class="col-aut">
                   <label>State </label>
-                  <%=a .text_field :state, id: :state %>
-              </div>
+                  <%=form.text_field :state, id: :state %>
+            </div>
 
-              <div class="col-aut">
+            <div class="col-aut">
                   <label>Zip </label>
-                  <%= a.text_field :zip_code, id: :zip_code %>
-              </div>
+                  <%= form.text_field :zipcode, id: :zipcode %>
+            </div>
       </div>
-      <%end%><!-- #### ADDRESS FIELD ENDS HERE #### -->
+      <!-- #### ADDRESS FIELD ENDS HERE #### -->
       <div class="form-row align-items-center">
           <div class="col-sm-2 col-form-label">
               <%=form.label :cart_number1 %>
