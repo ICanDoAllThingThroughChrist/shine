@@ -1,6 +1,10 @@
 <header>
   <h1 class="h2">Customer Search</h1>
 </header>
+<% if @custoemrs.present? %>
+  <%= render partial: "pager",
+  locals: {keywords: @keywords, page: @page} %>
+<% end %>
 <section class="search-form">
   <%=form_for :customers, method: :get do |f| %>
     <div class="input-group input-group-lg">
@@ -39,4 +43,8 @@
     <%end %>
   </tbody>
 </table>
+<% if @custoemrs.present? %>
+  <%= render partial: "pager",
+  locals: {keywords: @keywords, page: @page} %>
+<% end %>
 </section>
