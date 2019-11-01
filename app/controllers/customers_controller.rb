@@ -28,9 +28,19 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
   end
+  def create
+    @customer = Customer.new(params[:customer])
+    if @customer.save
+      redirect_to @customer
+    else
+      render 'new'
+    end
+  end
 
   def customer_params
-    params.require(:user).permit(:first_name, :last_name, :email, :phone, :cart_number1, :cart_number2, :cart_number3, address: [:street_address, :city, :state, :zip])
+    params.require(:customer).permit(:first_name, :last_name,
+      :email, :phone, :cart_number1, :cart_number2, :cart_number3,
+      address: [:street_address, :city, :state, :zip_code])
   end
 
 end
