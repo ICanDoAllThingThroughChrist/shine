@@ -25,4 +25,12 @@ class CustomersController < ApplicationController
       @customers = []
     end
   end
+  def new
+    @customer = Customer.new
+  end
+
+  def customer_params
+    params.require(:user).permit(:first_name, :last_name, :email, :phone, :cart_number1, :cart_number2, :cart_number3, address: [:street_address, :city, :state, :zip])
+  end
+
 end

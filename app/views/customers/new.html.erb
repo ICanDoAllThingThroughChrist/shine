@@ -1,0 +1,75 @@
+<%=form_with scope: @customer, url: customers_path, local: true do |form| %>
+  <% if @customer.errors.any? %>
+   <div id="error_explanation">
+    <h2><%= pluralize(customers.errors.count, "error") %> prohibited this customer from being saved:</h2>
+      <ul>
+      <% customer.errors.full_messages.each do |message| %>
+      <li>
+        <%=message %>
+      </li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+       <div class="form-row align-items-center">
+            <div class="col-aut">
+                <%=form.label :first_name %>
+                <%=form.text_field :first_name, id: :customer_first_name %>
+            </div>
+
+            <div class="col-aut">
+                <%=form.label :last_name %>
+                <%=form.text_field :last_name, id: :customer_last_name %>
+            </div>
+            <div class="col-aut">
+                <%=form.label :email %>
+                <%=form.email_field :email, id: :customer_email %>
+            </div>
+
+            <div class="col-aut">
+                <%=form.label :phone %>
+                <%=form.telephone_field :phone, id: :customer_phone %>
+            </div>
+      </div>
+      <div class="form-row align-items-center">
+          <%=form.fields_for :address do |a| %>
+              <div class="col-aut">
+                  <label>Street address </label>
+                  <%= a.text_field :street_address, id: :street_address %>
+              </div>
+              <div class="col-aut">
+                  <label>City </label>
+                  <%= a.text_field :city, id: :city %>
+              </div>
+              <div class="col-aut">
+                  <label>State </label>
+                  <%=a .text_field :state, id: :state %>
+              </div>
+
+              <div class="col-aut">
+                  <label>Zip </label>
+                  <%= a.text_field :zip_code, id: :zip_code %>
+              </div>
+      </div>
+      <%end%><!-- #### ADDRESS FIELD ENDS HERE #### -->
+      <div class="form-row align-items-center">
+          <div class="col-sm-2 col-form-label">
+              <%=form.label :cart_number1 %>
+              <%=form.text_field :cart_number1, id: :customer_cart_number1 %>
+          </div>
+
+          <div class="col-sm-2 col-form-label">
+              <%=form.label :cart_number2 %>
+              <%=form.text_field :cart_number2, id: :customer_cart_number2 %>
+          </div>
+
+          <div class="col-sm-2 col-form-label">
+              <%=form.label :cart_number3 %>
+              <%=form.text_field :cart_number3, id: :customer_cart_number3 %>
+          </div>
+      </div>
+<!-- #### ADDRESS FIELD STARTS HERE #### -->
+<div class="actions">
+    <%=form.submit 'Submit', class: 'btn btn-primary btn-lg' %>
+</div>
+<% end %>
