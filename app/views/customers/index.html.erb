@@ -29,6 +29,8 @@
       <th>First Name</th>
       <th>Laste Name</th>
       <th>Email</th>
+      <th>Address</th>
+      <th>CustomerID</th>
       <th>Joined</th>
     </tr>
   </thead>
@@ -38,6 +40,8 @@
       <td><%=customer.first_name%></td>
       <td><%=customer.last_name%></td>
       <td><%=customer.email%></td>
+      <td><%=customer.address%></td>
+      <td><%=customer.customerid%></td>
       <td><%=l customer.created_at.to_date%></td>
     </tr>
     <%end %>

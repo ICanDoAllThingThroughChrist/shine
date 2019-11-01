@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191101155134) do
+ActiveRecord::Schema.define(version: 20191101172730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 20191101155134) do
     t.hstore "address"
     t.string "phone"
     t.integer "taxid"
+    t.integer "customerid"
     t.index "lower((email)::text)", name: "index_customers_on_lower_email"
     t.index "lower((first_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_first_name_varchar_pattern_ops"
     t.index "lower((last_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_last_name_varchar_pattern_ops"
     t.index ["address"], name: "index_customers_on_address", unique: true
+    t.index ["customerid"], name: "index_customers_on_customerid", unique: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["phone"], name: "index_customers_on_phone", unique: true
     t.index ["username"], name: "index_customers_on_username", unique: true
