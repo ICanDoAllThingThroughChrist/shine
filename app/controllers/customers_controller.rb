@@ -33,12 +33,14 @@ class CustomersController < ApplicationController
   def create
     # binding.pry
     @customer = Customer.new(params[:customer])
-    if @customer.save
-      redirect_to customer
-    else
-      render 'new'
+    case @customer
+      when @customer.save
+        redirect_to customer
+      when @customer.errors.any?
+        render 'new'
     end
   end
+
 private
   def customer_params
      params.require(:customer).permit(:first_name,:last_name, :email,  :phone, :cart_number1, :cart_number2, :cart_number3, :street_number, :street_address, :city, :state, :zipcode)

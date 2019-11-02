@@ -1,76 +1,120 @@
-<%=form_with scope: @customer, url: customers_path, local: true do |form| %>
-      <% if @customer.errors.any? %>
-       <div id="error_explanation">
-        <h2><%= pluralize(customers.errors.count, "error") %> prohibited this customer from being saved:</h2>
-          <ul>
-          <% customer.errors.full_messages.each do |message| %>
-          <li>
-            <%=message %>
-          </li>
-          <% end %>
-          </ul>
+<section>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:45%; bottom:0; width:100%; }
+  </style>
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+  <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+  <div id='map'></div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoid2hva25vd3N3aGVuIiwiYSI6ImNrMXdod2JtbDAxemczY3FvbWM0Y2ppMjUifQ.799dPAWOL1zHbtLmd9_otA';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-79.4512, 43.6568],
+      zoom: 13
+    });
+
+    map.addControl(new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      }));
+
+    map.addSource("name-of-source", {
+      type: "vector",
+      url: "mapbox://styles/whoknowswhen/ck2581zmmhd0w1dpes7ogxdbm"
+      });
+
+    map.addLayer({
+          id: "layer-id",
+          type: "line",
+          source: "NEFRI101-TAMU-geocode-3fi4gk",
+          "source-layer": "mapbox://styles/whoknowswhen/ck2581zmmhd0w1dpes7ogxdbm",
+      });
+  </script>
+</section>
+<section>
+  <%=form_with scope: @customer, url: customers_path, local: true do |form| %>
+        <% if @customer.errors.any? %>
+         <div id="error_explanation">
+          <h2><%= pluralize(customers.errors.count, "error") %> prohibited this customer from being saved:</h2>
+            <ul>
+            <% customer.errors.full_messages.each do |message| %>
+            <li>
+              <%=message %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+         <div class="form-row align-items-center">
+              <div class="col-aut">
+                  <%=form.label :first_name %>
+                  <%=form.text_field :first_name, id: :customer_first_name %>
+              </div>
+
+              <div class="col-aut">
+                  <%=form.label :last_name %>
+                  <%=form.text_field :last_name, id: :customer_last_name %>
+              </div>
+              <div class="col-aut">
+                  <%=form.label :email %>
+                  <%=form.email_field :email, id: :customer_email %>
+              </div>
+
+              <div class="col-aut">
+                  <%=form.label :phone %>
+                  <%=form.telephone_field :phone, id: :customer_phone %>
+              </div>
+              <div class="col-aut">
+                    <label>Street Number </label>
+                    <%= form.text_field :address_number, id: :address_number %>
+              </div>
+              <div class="col-aut">
+                    <label>Street address </label>
+                    <%= form.text_field :address, id: :address %>
+              </div>
+              <div class="col-aut">
+                    <label>City </label>
+                    <%= form.text_field :city, id: :city %>
+              </div>
+              <div class="col-aut">
+                    <label>State </label>
+                    <%=form.text_field :state, id: :state %>
+              </div>
+
+              <div class="col-aut">
+                    <label>Zip </label>
+                    <%= form.text_field :zipcode, id: :zipcode %>
+              </div>
         </div>
-      <% end %>
-       <div class="form-row align-items-center">
-            <div class="col-aut">
-                <%=form.label :first_name %>
-                <%=form.text_field :first_name, id: :customer_first_name %>
+        <!-- #### ADDRESS FIELD ENDS HERE #### -->
+        <div class="form-row align-items-center">
+            <div class="col-sm-2 col-form-label">
+                <%=form.label :cart_number1 %>
+                <%=form.text_field :cart_number1, id: :customer_cart_number1 %>
             </div>
 
-            <div class="col-aut">
-                <%=form.label :last_name %>
-                <%=form.text_field :last_name, id: :customer_last_name %>
-            </div>
-            <div class="col-aut">
-                <%=form.label :email %>
-                <%=form.email_field :email, id: :customer_email %>
+            <div class="col-sm-2 col-form-label">
+                <%=form.label :cart_number2 %>
+                <%=form.text_field :cart_number2, id: :customer_cart_number2 %>
             </div>
 
-            <div class="col-aut">
-                <%=form.label :phone %>
-                <%=form.telephone_field :phone, id: :customer_phone %>
+            <div class="col-sm-2 col-form-label">
+                <%=form.label :cart_number3 %>
+                <%=form.text_field :cart_number3, id: :customer_cart_number3 %>
             </div>
-            <div class="col-aut">
-                  <label>Street Number </label>
-                  <%= form.text_field :address_number, id: :address_number %>
-            </div>
-            <div class="col-aut">
-                  <label>Street address </label>
-                  <%= form.text_field :address, id: :address %>
-            </div>
-            <div class="col-aut">
-                  <label>City </label>
-                  <%= form.text_field :city, id: :city %>
-            </div>
-            <div class="col-aut">
-                  <label>State </label>
-                  <%=form.text_field :state, id: :state %>
-            </div>
-
-            <div class="col-aut">
-                  <label>Zip </label>
-                  <%= form.text_field :zipcode, id: :zipcode %>
-            </div>
-      </div>
-      <!-- #### ADDRESS FIELD ENDS HERE #### -->
-      <div class="form-row align-items-center">
-          <div class="col-sm-2 col-form-label">
-              <%=form.label :cart_number1 %>
-              <%=form.text_field :cart_number1, id: :customer_cart_number1 %>
-          </div>
-
-          <div class="col-sm-2 col-form-label">
-              <%=form.label :cart_number2 %>
-              <%=form.text_field :cart_number2, id: :customer_cart_number2 %>
-          </div>
-
-          <div class="col-sm-2 col-form-label">
-              <%=form.label :cart_number3 %>
-              <%=form.text_field :cart_number3, id: :customer_cart_number3 %>
-          </div>
-      </div>
-<!-- #### ADDRESS FIELD STARTS HERE #### -->
-<div class="actions">
-    <%=form.submit 'Submit', class: 'btn btn-primary btn-lg' %>
-</div>
-<% end %>
+        </div>
+  <!-- #### ADDRESS FIELD STARTS HERE #### -->
+  <div class="actions">
+      <%=form.submit 'Submit', class: 'btn btn-primary btn-lg' %>
+  </div>
+  <% end %>
+</section>
