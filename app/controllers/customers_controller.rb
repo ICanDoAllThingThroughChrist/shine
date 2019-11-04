@@ -32,16 +32,17 @@ class CustomersController < ApplicationController
   end
   def create
     # binding.pry
-    @customer = Customer.new(params[:customer])
+    @customer = Customer.new(customer_params)#https://guides.rubyonrails.org/getting_started.html#creating-articles
     if @customer.save
-      redirect_to customer
+      redirect_to customer_path(@customer)
     else
       render 'new'
     end
   end
 private
   def customer_params
-     params.require(:customer).permit(:first_name,:last_name, :email,  :phone, :cart_number1, :cart_number2, :cart_number3, :street_number, :street_address, :city, :state, :zipcode)
+    params.require(:customer).permit(:id,:first_name, :last_name, :email,  :phone, :cart_number1, :cart_number2, :cart_number3, :address_number, :address, :city, :state, :zipcode)
+      # permitted =  params.require(:customer).permit(:first_name, :last_name, :email,  :phone, :cart_number1, :cart_number2, :cart_number3, :address_number, :address, :city, :state, :zipcode)
+
   end
-  # permitted = params.require(:customer).permit!(:first_name,:last_name, :email,  :phone, :cart_number1, :cart_number2, :cart_number3, :street_number, :street_address, :city, :state, :zipcode)
 end

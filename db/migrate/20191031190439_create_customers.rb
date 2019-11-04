@@ -3,12 +3,11 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
     create_table :customers do |t|
       t.string :first_name , null:false
       t.string :last_name  , null:false
-      t.string :email      , null:false
-      t.string :username   , null:false
+      t.string :email      , null:true
+      t.string :username   , null:true
 
       t.timestamps          null:false
     end
-    add_index :customers, :email, unique: true
-    add_index :customers, :username, unique: true
+
   end
 end

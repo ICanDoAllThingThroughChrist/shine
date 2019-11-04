@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20191101214231) do
   create_table "customers", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "email", null: false
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cart_number1"
@@ -44,10 +44,7 @@ ActiveRecord::Schema.define(version: 20191101214231) do
     t.index "lower((email)::text)", name: "index_customers_on_lower_email"
     t.index "lower((first_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_first_name_varchar_pattern_ops"
     t.index "lower((last_name)::text) varchar_pattern_ops", name: "index_customers_on_lower_last_name_varchar_pattern_ops"
-    t.index ["address"], name: "index_customers_on_address", unique: true
     t.index ["customerid"], name: "index_customers_on_customerid", unique: true
-    t.index ["email"], name: "index_customers_on_email", unique: true
-    t.index ["phone"], name: "index_customers_on_phone", unique: true
   end
 
   create_table "users", force: :cascade do |t|
