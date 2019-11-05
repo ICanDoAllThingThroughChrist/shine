@@ -4,5 +4,8 @@ Rails.application.routes.draw do
     root to: "dashboard#index"
     get '/users/sign_out',:to => 'devise/sessions#destroy'
     get '/users/sign_in', :to => 'devise/sessions#new'
-    resources :customers, only: [:index,  :new, :create, :show]
+    resources :customers, only: [:index, :new, :create, :show]
+    resources :carts, only: [:index,:new,:show, :create,:errors, :search]
+    get 'errors',  to: 'carts#errors', as: :error
+    get 'search', to: 'carts#search', as: :search
 end

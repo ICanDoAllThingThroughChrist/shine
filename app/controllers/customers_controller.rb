@@ -29,10 +29,12 @@ class CustomersController < ApplicationController
   end
   def new
     @customer = Customer.new
+    binding.pry
   end
   def create
     # binding.pry
     @customer = Customer.new(customer_params)#https://guides.rubyonrails.org/getting_started.html#creating-articles
+
     if @customer.save
       redirect_to customer_path(@customer)
     else

@@ -1,0 +1,15 @@
+<h1>Listing carts</h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th></th>
+  </tr>
+
+  <% @carts.each do |cart| %>
+    <tr>
+      <td><%= cart.number %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+    </tr>
+  <% end %>
+</table>
